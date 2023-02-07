@@ -1,10 +1,15 @@
 import React from "react";
 
-function Search() {
+function Search({search, setSearch}) {
   function handleSubmit(e) {
     e.preventDefault();
-    console.log("submitted");
+    handleChange(e)
   }
+
+  function handleChange(event) {
+    setSearch(event.target[0].value)
+  }
+
 
   return (
     <form className="searchbar" onSubmit={handleSubmit}>
@@ -12,8 +17,8 @@ function Search() {
         type="text"
         id="search"
         placeholder="search free stuff"
-        value={""}
-        onChange={(e) => console.log(e.target.value)}
+        // value={search}
+        // onChange={handleChange}
       />
       <button type="submit">🔍</button>
     </form>
