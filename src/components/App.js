@@ -30,7 +30,9 @@ function App() {
   return (
     <div className="app">
       <Header setSearchString={setSearchString} />
-      <ListingsContainer listings={filteredListings} />
+      <ListingsContainer 
+        listings={filteredListings} 
+        setListings={setListings} />
     </div>
   );
 }

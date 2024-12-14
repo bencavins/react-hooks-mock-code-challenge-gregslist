@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function ListingCard({ image, description, location }) {
+function ListingCard({ id, image, description, location, setListings }) {
   const [isFavorite, setIsFavorite] = useState(false)
 
   function handleClick(event) {
@@ -16,7 +16,19 @@ function ListingCard({ image, description, location }) {
   }
 
   function handleDeleteClick(event) {
-    console.log(`deleting ${description}`)
+    setListings(existingListings => existingListings.filter(listing => {
+      // filter out listing that matched the current listing id
+      if (listing.id !== id) {
+        return listing
+      }
+    }))
+
+    // send a DELETE request to the db
+    fetch(`http://localhost:6001/listings/${id}`, {
+      method: 'DELETE'
+    })
+    .then(resp => resp.json())
+    .then(jsonData => console.log(jsonData))
   }
 
   return (
